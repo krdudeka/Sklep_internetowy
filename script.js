@@ -1,6 +1,7 @@
 window.onload = function () {
 
     let sum = 0.00;
+    let items = 0;
 
     updateSum(sum);
 
@@ -18,28 +19,36 @@ window.onload = function () {
     });
 
     function addToCard(parentOfProduct) {
-        let productToAdd = document.createElement('div');
-        productToAdd.classList.add('card-product');
-        let productNameToAdd = document.createElement('p');
-        productNameToAdd.classList.add('name-card-product');
-        let productPriceToAdd = document.createElement('p');
-        productPriceToAdd.classList.add('card-product-price');
-        let productRemoveButtonToAdd = document.createElement('button');
-        productRemoveButtonToAdd.textContent = 'X';
-        productRemoveButtonToAdd.classList.add('remove-product');
+        if (items < 8){
+            let productToAdd = document.createElement('div');
+            productToAdd.classList.add('card-product');
+            let productNameToAdd = document.createElement('p');
+            productNameToAdd.classList.add('name-card-product');
+            let productPriceToAdd = document.createElement('p');
+            productPriceToAdd.classList.add('card-product-price');
+            let productRemoveButtonToAdd = document.createElement('button');
+            productRemoveButtonToAdd.textContent = 'X';
+            productRemoveButtonToAdd.classList.add('remove-product');
 
-        let priceOfProduct = parentOfProduct.previousElementSibling;
-        let nameOfProduct = priceOfProduct.previousElementSibling;
+            let priceOfProduct = parentOfProduct.previousElementSibling;
+            let nameOfProduct = priceOfProduct.previousElementSibling;
 
-        productNameToAdd.textContent = nameOfProduct.textContent;
-        productPriceToAdd.textContent = priceOfProduct.textContent;
+            productNameToAdd.textContent = nameOfProduct.textContent;
+            productPriceToAdd.textContent = priceOfProduct.textContent;
 
-        productToAdd.appendChild(productNameToAdd);
-        productToAdd.appendChild(productPriceToAdd);
-        productToAdd.appendChild(productRemoveButtonToAdd);
-        document.getElementById('card').appendChild(productToAdd);
-        sum += parseFloat(priceOfProduct.textContent);
-        updateSum(sum);
+            productToAdd.appendChild(productNameToAdd);
+            productToAdd.appendChild(productPriceToAdd);
+            productToAdd.appendChild(productRemoveButtonToAdd);
+            document.getElementById('card').appendChild(productToAdd);
+            sum += parseFloat(priceOfProduct.textContent);
+            updateSum(sum);
+            items += 1;
+        } else {
+            window.alert('Za dużo elementów w koszyku!');
+        }
+
+
+
     }
 
     function updateSum(value) {
@@ -51,26 +60,36 @@ window.onload = function () {
         document.getElementById('card').removeChild(elementToRemove);
         sum -= parseFloat(clickedElement.previousElementSibling.textContent);
         updateSum(sum);
+        items -= 1;
     }
 
 
     let buttonBuy = document.getElementById('buy');
     buttonBuy.addEventListener('click', function () {
         window.alert('Dokono zakupu za ' + sum + ' zł');
+        // let clickBuy = buttonBuy.parentElement;
+        // document.getElementsByClassName('card-product').removeChild(clickBuy);
 
+        sum = 0;
+        updateSum(sum);
+        items = 0;
     });
 
 
 
 
-    document.getElementById('not-buy').addEventListener('click', function (e) {
-        if (e.target){
-            removeAllElement(e.target);
-        }
+    document.getElementById('not-buy').addEventListener('click', function () {
+        removeAllElement();
+
     });
 
-    function removeAllElement(clickedNotBuy) {
+    function removeAllElement() {
+        let elementToRemove = document.getElementsByClassName('card-product').parentElement;
+        console.log(elementToRemove);
 
+        sum = 0;
+        updateSum(sum);
+        items = 0;
     }
 
 
