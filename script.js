@@ -67,32 +67,36 @@ window.onload = function () {
     let buttonBuy = document.getElementById('buy');
     buttonBuy.addEventListener('click', function () {
         window.alert('Dokono zakupu za ' + sum + ' zł');
-        // let clickBuy = buttonBuy.parentElement;
-        // document.getElementsByClassName('card-product').removeChild(clickBuy);
+
+        let i = 0;
+        let counter = 1;
+        do {
+            let remove = document.getElementsByClassName('card-product')[i];
+            document.getElementById('card').removeChild(remove);
+            counter ++;
+        } while (counter = document.getElementsByClassName('card-product').length);
 
         sum = 0;
         updateSum(sum);
         items = 0;
     });
-
 
 
 
     document.getElementById('not-buy').addEventListener('click', function () {
-        removeAllElement();
 
-    });
-
-    function removeAllElement() {
-        let elementToRemove = document.getElementsByClassName('card-product').parentElement;
-        console.log(elementToRemove);
+        let i = 0;
+        let counter = 1;
+        do {
+            let remove = document.getElementsByClassName('card-product')[i];
+            document.getElementById('card').removeChild(remove);
+            counter ++;
+        } while (counter = document.getElementsByClassName('card-product').length);
 
         sum = 0;
         updateSum(sum);
         items = 0;
-    }
-
-
+    });
 
 
 };
