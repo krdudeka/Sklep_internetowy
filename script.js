@@ -67,7 +67,14 @@ window.onload = function () {
     let buttonBuy = document.getElementById('buy');
     buttonBuy.addEventListener('click', function () {
         window.alert('Dokono zakupu za ' + sum + ' zł');
+        removeAllElement();
+   });
 
+
+
+    document.getElementById('not-buy').addEventListener('click', removeAllElement);
+
+    function removeAllElement() {
         let i = 0;
         let counter = 1;
         do {
@@ -79,24 +86,6 @@ window.onload = function () {
         sum = 0;
         updateSum(sum);
         items = 0;
-    });
-
-
-
-    document.getElementById('not-buy').addEventListener('click', function () {
-
-        let i = 0;
-        let counter = 1;
-        do {
-            let remove = document.getElementsByClassName('card-product')[i];
-            document.getElementById('card').removeChild(remove);
-            counter ++;
-        } while (counter = document.getElementsByClassName('card-product').length);
-
-        sum = 0;
-        updateSum(sum);
-        items = 0;
-    });
-
+    }
 
 };
